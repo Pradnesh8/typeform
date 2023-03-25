@@ -2,7 +2,10 @@ import React from 'react'
 
 const Progress = () => {
     return (
-        <div>Progress</div>
+        <div className='progress-bar'>
+            {/* progress indicator */}
+            <div className='progress'></div>
+        </div>
     )
 }
 
