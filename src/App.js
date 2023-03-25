@@ -26,10 +26,10 @@ const App = () => {
      *          - Button [Ok/Submit]
      */
     return (
-        <>
+        <div className="container">
             <Progress />
             <Body />
-        </>
+        </div>
     )
 }
 
