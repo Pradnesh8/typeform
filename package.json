@@ -1,0 +1,38 @@
+{
+  "name": "typeform",
+  "version": "1.0.0",
+  "description": "Typeform is a website which take response from users",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pradnesh8/typeform.git"
+  },
+  "keywords": [
+    "growthx",
+    "typeform",
+    "react"
+  ],
+  "author": "Pradnesh Khedekar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pradnesh8/typeform/issues"
+  },
+  "homepage": "https://github.com/Pradnesh8/typeform#readme",
+  "dependencies": {
+    "browserslist": "^4.21.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.8.3",
+    "process": "^0.11.10"
+  },
+  "browserlists": [
+    "last 5 versions"
+  ]
+}
