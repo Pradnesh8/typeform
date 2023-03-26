@@ -2,6 +2,8 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import Body from "./components/Body";
 import Progress from "./components/progress";
+import growthXLogo from './../assets/growthX-full-logo.png';
+
 const App = () => {
     /**
      * Progress bar
@@ -27,7 +29,12 @@ const App = () => {
      */
     return (
         <div className="container">
-            <Progress />
+            <div className="header-block">
+                <Progress />
+                <div className='head'>
+                    <img className='logo' src={growthXLogo} alt="logo" />
+                </div>
+            </div>
             <Body />
         </div>
     )
