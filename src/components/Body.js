@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Question from './Question'
 
 const Body = () => {
+    const [qno, setQno] = useState();
     /**
      * Type of Question
      *  - Agreement 
@@ -12,9 +13,18 @@ const Body = () => {
      *  - email
      *  - phone
      */
+    useEffect(() => {
+        const i = setTimeout(() => {
+            setQno(0);
+        }, 300)
+        return () => {
+            clearTimeout(i);
+        }
+    }, [qno]);
     return (
+        // TODO on scroll update question && check if response given is valid
         <div className='main-wrapper'>
-            <Question type="agreement" />
+            <Question type="agreement" qno={qno} />
             <Question type="text" qno={1} />
             <Question type="text" qno={2} />
             <Question type="dropdown" qno={3} />

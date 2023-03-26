@@ -53,28 +53,26 @@
   z-index: 0;
   width: 100%;
   height: 100vh;
-  overflow: scroll;
+  overflow: hidden;
 }
-/* .sub-container {
+
+.sub-container {
   position: absolute;
   width: 100%;
   height: 100%;
   padding-top: 0px;
   pointer-events: none;
-  transition: transform 600ms ease 0s, opacity 300ms ease 0s;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(100vh);
+}
+.sub-container-visible {
   opacity: 1;
-  transform: translateY(-100vh);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-.sub-container {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  transition: transform 600ms ease 0s, opacity 400ms ease 0s;
+  transform: translateY(0vh);
+  pointer-events: all;
 }
 
 .question-container {

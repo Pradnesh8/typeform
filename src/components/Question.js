@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Agreement = () => {
+const Agreement = ({ qno }) => {
     return (
-        <div className='sub-container'>
+        <div className={'sub-container ' + (qno === 0 && 'sub-container-visible')}>
             <div className='question-container'>
                 <section className='content'>
                     <div className='header-text'>Up-skilling requires time commitment</div>
@@ -49,7 +49,7 @@ const TextQuestion = ({ qno }) => {
 const Question = ({ type, qno }) => {
     switch (type) {
         case "agreement":
-            return <Agreement />
+            return <Agreement qno={qno} />
         case "text":
             return <TextQuestion qno={qno} />
     }
