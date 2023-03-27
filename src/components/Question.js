@@ -1,8 +1,19 @@
-import React from 'react'
-
-const Agreement = ({ qno }) => {
+import { TextField } from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react'
+import QuestionContext from '../utils/QuestionContext';
+const Agreement = () => {
+    const { qno, setQno } = useContext(QuestionContext);
+    const [animate, setAnimate] = useState(false);
+    useEffect(() => {
+        const i = setTimeout(() => {
+            setAnimate(true);
+        }, 300)
+        return () => {
+            clearTimeout(i);
+        }
+    }, []);
     return (
-        <div className={'sub-container ' + (qno === 0 && 'sub-container-visible')}>
+        <div className={'sub-container ' + (qno === 0 && animate && 'sub-container-visible')}>
             <div className='question-container'>
                 <section className='content'>
                     <div className='header-text'>Up-skilling requires time commitment</div>
@@ -18,40 +29,78 @@ const Agreement = ({ qno }) => {
                     </div>
                 </section>
                 <section className='actions'>
-                    <button className='cta-btn'>I agree</button>
+                    <button className='cta-btn' onClick={() => setQno(prevQue => prevQue + 1)}>I agree</button>
                     <div className='cta-text'>press <b>Enter ↵</b></div>
                 </section>
             </div>
         </div>
     )
 }
-const TextQuestion = ({ qno }) => {
+const TextQuestion = () => {
+    const { qno, setQno } = useContext(QuestionContext);
+    const [animate, setAnimate] = useState(false);
+    useEffect(() => {
+        const i = setTimeout(() => {
+            qno === 1 && setAnimate(true);
+        }, 300)
+        return () => {
+            clearTimeout(i);
+        }
+    }, [qno]);
     return (
-        <div className='sub-container'>
-            <div className='question-container'>
-                <section className='content'>
-                    <div className='header-text'>
-                        <span>{qno} →</span>
-                        <span>What's your first name? *</span>
+        <>
+            {console.log("asdasd")}
+            {
+                qno === 1 &&
+                <div className={'sub-container ' + (qno === 1 && animate && 'sub-container-visible')}>
+                    <div className='question-container'>
+                        <section className='content'>
+                            <div className='header-text'>
+                                <span>{qno} →</span>
+                                <span>What's your first name? *</span>
+                            </div>
+                            <div className="sub-content-1">
+                                {/* <TextField id="standard-basic" label="Standard" variant="standard" fullWidth /> */}
+                                <input type="text" name="name" id="name" autoComplete='name' className='input-text-field' />
+                            </div>
+                        </section>
+                        <section className='actions'>
+                            <button className='cta-btn' onClick={() => setQno(prevQue => prevQue + 1)}>OK ✓</button>
+                            <div className='cta-text'>press <b>Enter ↵</b></div>
+                        </section>
                     </div>
-                    <div className="sub-content-1">
-                        <input type="text" name="name" id="name" autoComplete='name' className='input-text-field' />
+                </div>
+            }
+            {
+                qno === 2 &&
+                <div className={'sub-container ' + (qno === 2 && animate && 'sub-container-visible')}>
+                    <div className='question-container'>
+                        <section className='content'>
+                            <div className='header-text'>
+                                <span>{qno} →</span>
+                                <span>What's your last name? *</span>
+                            </div>
+                            <div className="sub-content-1">
+                                <input type="text" name="name" id="name" autoComplete='name' className='input-text-field' />
+                            </div>
+                        </section>
+                        <section className='actions'>
+                            <button className='cta-btn' onClick={() => setQno(prevQue => prevQue + 1)}>OK ✓</button>
+                            <div className='cta-text'>press <b>Enter ↵</b></div>
+                        </section>
                     </div>
-                </section>
-                <section className='actions'>
-                    <button className='cta-btn'>OK ✓</button>
-                    <div className='cta-text'>press <b>Enter ↵</b></div>
-                </section>
-            </div>
-        </div>
+                </div>
+            }
+        </>
     )
 }
-const Question = ({ type, qno }) => {
+const Question = ({ type }) => {
+
     switch (type) {
         case "agreement":
-            return <Agreement qno={qno} />
+            return <Agreement />
         case "text":
-            return <TextQuestion qno={qno} />
+            return <TextQuestion />
     }
 }
 
