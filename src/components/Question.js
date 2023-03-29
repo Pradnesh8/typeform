@@ -13,7 +13,8 @@ const Agreement = () => {
         }
     }, []);
     return (
-        <div className={'sub-container ' + (qno === 0 && animate && 'sub-container-visible')}>
+        /*+ (qno === 0 && animate && 'sub-container-visible')*/
+        <div className={'sub-container'} key={crypto.randomUUID()}>
             <div className='question-container'>
                 <section className='content'>
                     <div className='header-text'>Up-skilling requires time commitment</div>
@@ -49,19 +50,18 @@ const TextQuestion = () => {
     }, [qno]);
     return (
         <>
-            {console.log("asdasd")}
             {
-                qno === 1 &&
-                <div className={'sub-container ' + (qno === 1 && animate && 'sub-container-visible')}>
+                /*+ (qno >= 1 && animate && 'sub-container-visible')*/
+                <div className={'sub-container'} key={crypto.randomUUID()}>
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>
-                                <span>{qno} →</span>
+                                <span>1 →</span>
                                 <span>What's your first name? *</span>
                             </div>
                             <div className="sub-content-1">
                                 {/* <TextField id="standard-basic" label="Standard" variant="standard" fullWidth /> */}
-                                <input type="text" name="name" id="name" autoComplete='name' className='input-text-field' />
+                                <input type="text" name="name" placeholder="Type your answer here" id="name" autoComplete='name' className='input-text-field' />
                             </div>
                         </section>
                         <section className='actions'>
@@ -71,17 +71,33 @@ const TextQuestion = () => {
                     </div>
                 </div>
             }
+        </>
+    )
+}
+const TextQuestion2 = () => {
+    const { qno, setQno } = useContext(QuestionContext);
+    const [animate, setAnimate] = useState(false);
+    useEffect(() => {
+        const i = setTimeout(() => {
+            qno === 1 && setAnimate(true);
+        }, 300)
+        return () => {
+            clearTimeout(i);
+        }
+    }, [qno]);
+    return (
+        <>
             {
-                qno === 2 &&
-                <div className={'sub-container ' + (qno === 2 && animate && 'sub-container-visible')}>
+                /*+ (qno >= 2 && animate && 'sub-container-visible')*/
+                <div className={'sub-container'} key={crypto.randomUUID()}>
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>
-                                <span>{qno} →</span>
+                                <span>2 →</span>
                                 <span>What's your last name? *</span>
                             </div>
                             <div className="sub-content-1">
-                                <input type="text" name="name" id="name" autoComplete='name' className='input-text-field' />
+                                <input type="text" name="name" placeholder="Type your answer here" id="name" autoComplete='name' className='input-text-field' />
                             </div>
                         </section>
                         <section className='actions'>
@@ -101,6 +117,8 @@ const Question = ({ type }) => {
             return <Agreement />
         case "text":
             return <TextQuestion />
+        case "text2":
+            return <TextQuestion2 />
     }
 }
 

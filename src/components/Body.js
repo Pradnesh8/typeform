@@ -31,7 +31,7 @@ const Body = () => {
             <div className='main-wrapper'>
                 <Question type="agreement" />
                 <Question type="text" />
-                <Question type="text" />
+                <Question type="text2" />
                 <Question type="dropdown" />
                 <Question type="option" />
                 <Question type="multi-option" />
