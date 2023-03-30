@@ -133,7 +133,8 @@ li {
   list-style-position: inside;
 }
 
-.input-text-field {
+.input-text-field,
+.industry-dropdown {
   color: white;
   margin-left: 40px;
   margin-top: 1rem;
@@ -147,4 +148,41 @@ li {
 
 input[type="text"]:focus {
   outline: none;
+}
+
+.drop-sub-content-2 {
+  margin-left: 40px;
+}
+
+.dropdown-list {
+  max-height: -webkit-fill-available;
+  width: 44vw;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 2px;
+  display: flex;
+  position: absolute;
+  overflow-y: scroll;
+  margin-bottom: 10px;
+}
+.dropdown-list > .options {
+  padding: 0.5rem;
+  margin-left: 40px;
+  text-align: left;
+  padding-left: 0.8rem;
+  font-size: 20px;
+  background: #232121;
+  border: 1px solid white;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.2rem;
+}
+.drop-input {
+  display: flex;
+  align-items: center;
+}
+
+.drop-icon {
+  margin-left: -16px;
+  cursor: pointer;
 }
