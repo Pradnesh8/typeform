@@ -35,7 +35,7 @@ const Body = () => {
                 <Question type="dropdown" />
                 <Question type="option" />
                 <Question type="multi-option" />
-                <Question type="multi-option" />
+                <Question type="multi-option2" />
                 <Question type="email" />
                 <Question type="phone" />
             </div>
