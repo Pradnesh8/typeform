@@ -2,6 +2,7 @@ import { TextField } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react'
 import QuestionContext from '../utils/QuestionContext';
 import { industryList } from '../utils/helper';
+import CountryDropdown from './CountryDropdown';
 const Agreement = () => {
     const { qno, setQno } = useContext(QuestionContext);
     const [animate, setAnimate] = useState(false);
@@ -348,6 +349,108 @@ const MultiOptionQuestion = () => {
         </>
     )
 }
+const EmailForm = () => {
+    const { qno, setQno } = useContext(QuestionContext);
+    const [animate, setAnimate] = useState(false);
+    useEffect(() => {
+        const i = setTimeout(() => {
+            qno === 1 && setAnimate(true);
+        }, 300)
+        return () => {
+            clearTimeout(i);
+        }
+    }, [qno]);
+    return (
+        <>
+            {
+                /*+ (qno >= 1 && animate && 'sub-container-visible')*/
+                <div className={'sub-container'}>
+                    <div className='question-container'>
+                        <section className='content'>
+                            <div className='header-text'>
+                                <span>6 →</span>
+                                <span>Email you'd like to register with? *</span>
+                            </div>
+                            <div className="sub-content-2 drop-sub-content-2">
+                                We will personalize your learning experience accordingly
+                            </div>
+                            <div className="sub-content-1">
+                                {/* <TextField id="standard-basic" label="Standard" variant="standard" fullWidth /> */}
+                                <input type="text" name="name" placeholder="name@example.com" id="name" autoComplete='name' className='input-text-field' />
+                            </div>
+                        </section>
+                        <section className='actions'>
+                            <button className='cta-btn' onClick={() => setQno(prevQue => prevQue + 1)}>OK ✓</button>
+                            <div className='cta-text'>press <b>Enter ↵</b></div>
+                        </section>
+                    </div>
+                </div>
+            }
+        </>
+    )
+}
+const PhoneForm = () => {
+    const { qno, setQno } = useContext(QuestionContext);
+    const [animate, setAnimate] = useState(false);
+    const [phone, setPhone] = useState("");
+    const [selector, setSelector] = useState(false);
+    const { countryName } = useContext(QuestionContext);
+    useEffect(() => {
+        const i = setTimeout(() => {
+            qno === 1 && setAnimate(true);
+        }, 300)
+        return () => {
+            clearTimeout(i);
+        }
+    }, [qno]);
+    return (
+        <>
+            {
+                /*+ (qno >= 1 && animate && 'sub-container-visible')*/
+                <div className={'sub-container'}>
+                    <div className='question-container'>
+                        <section className='content'>
+                            <div className='header-text'>
+                                <span>7 →</span>
+                                <span>Your phone number *</span>
+                            </div>
+                            <div className="sub-content-2 drop-sub-content-2">
+                                We won't call you unless it is absolutely required to process your application.
+                            </div>
+                            <div className="sub-content-1 sub-content-1-phone">
+                                {/* <TextField id="standard-basic" label="Standard" variant="standard" fullWidth /> */}
+                                {
+                                    !selector ?
+                                        <div className='country-selected' onClick={() => setSelector(true)}>
+                                            <img
+                                                src={"https://flagcdn.com/20x15/" + countryName + ".png"}
+                                                srcset={"https://flagcdn.com/40x30/" + countryName + ".png 2x,https://flagcdn.com/60x45/" + countryName + ".png 3x"}
+                                                width="20"
+                                                height="15"
+                                                className='country-flag'
+                                                alt={"country"} />
+                                            <span id='drop-icon'>⋁</span>
+                                        </div> :
+                                        <div className='country-dropdown'>
+                                            <CountryDropdown handleSelect={setSelector} />
+                                        </div>
+                                }
+                                {
+                                    !selector &&
+                                    <input type="tel" name="name" onChange={(e) => setPhone(e.target.value)} placeholder="081234 56789" id="name" autoComplete='tel-national' className='input-text-field phone-field' value={phone} />
+                                }
+                            </div>
+                        </section>
+                        <section className='actions'>
+                            <button className='cta-btn' onClick={() => setQno(prevQue => prevQue + 1)}>OK ✓</button>
+                            <div className='cta-text'>press <b>Enter ↵</b></div>
+                        </section>
+                    </div>
+                </div>
+            }
+        </>
+    )
+}
 const Question = ({ type }) => {
 
     switch (type) {
@@ -363,6 +466,10 @@ const Question = ({ type }) => {
             return <OptionQuestion />
         case "multi-option":
             return <MultiOptionQuestion />
+        case "email":
+            return <EmailForm />
+        case "phone":
+            return <PhoneForm />
     }
 }
 
