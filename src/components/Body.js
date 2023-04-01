@@ -4,6 +4,7 @@ import QuestionContext from '../utils/QuestionContext';
 
 const Body = () => {
     const [qno, setQno] = useState(0);
+    const [countryName, setCountryName] = useState("in");
     /**
      * Type of Question
      *  - Agreement 
@@ -26,7 +27,9 @@ const Body = () => {
         // TODO on scroll update question && check if response given is valid
         <QuestionContext.Provider value={{
             qno,
-            setQno
+            setQno,
+            countryName,
+            setCountryName
         }}>
             <div className='main-wrapper'>
                 <Question type="agreement" />
@@ -35,7 +38,7 @@ const Body = () => {
                 <Question type="dropdown" />
                 <Question type="option" />
                 <Question type="multi-option" />
-                <Question type="multi-option2" />
+                {/* <Question type="multi-option2" /> */}
                 <Question type="email" />
                 <Question type="phone" />
             </div>
