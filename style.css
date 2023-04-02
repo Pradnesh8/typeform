@@ -45,7 +45,7 @@
 
 .progress {
   background-color: #0077ff;
-  width: 25%;
+  width: 0%;
   height: 100%;
   border: 0;
 }
@@ -209,6 +209,10 @@ input[type="text"]:focus {
   cursor: pointer;
 }
 
+.selected-option {
+  background: #8f8c8c;
+}
+
 .role-opt-btn-key {
   border: 1px solid white;
   height: 1.5rem;
@@ -221,7 +225,10 @@ input[type="text"]:focus {
   background: black;
   border-radius: 0.3rem;
 }
-
+.selected-option > .role-opt-btn-key {
+  background: white;
+  color: black;
+}
 .role-opt-text {
   padding: 0 1rem 0 0.2rem;
 }
@@ -325,4 +332,23 @@ input[type="text"]:focus {
 .phone-field {
   margin-left: 0;
   outline: none;
+}
+
+.showError {
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+  padding: 0.5rem;
+  font-size: 16px;
+  margin-top: 0.5rem;
+  color: #af0404;
+  width: fit-content;
+  background: #f7e6e6;
+  border-radius: 0.3rem;
+  gap: 5px;
+}
+.icon-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
