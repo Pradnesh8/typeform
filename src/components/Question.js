@@ -80,7 +80,7 @@ const TextQuestion = () => {
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>
-                                <span>1 →</span>
+                                <span className='qno-text'>1 →</span>
                                 <span>What's your first name? *</span>
                             </div>
                             <div className="sub-content-1">
@@ -137,7 +137,7 @@ const TextQuestion2 = () => {
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>
-                                <span>2 →</span>
+                                <span className='qno-text'>2 →</span>
                                 <span>What's your last name, {formData["name"]}? *</span>
                             </div>
                             <div className="sub-content-1">
@@ -220,7 +220,7 @@ const DropdownQuestion = () => {
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>
-                                <span>3 →</span>
+                                <span className='qno-text'>3 →</span>
                                 <span>What industry is your company in? *</span>
                             </div>
                             <div className="sub-content-2 drop-sub-content-2">
@@ -332,7 +332,7 @@ const OptionQuestion = () => {
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>
-                                <span>4 →</span>
+                                <span className='qno-text'>4 →</span>
                                 <span>Your role in your company? *</span>
                             </div>
                             <div className="sub-content-2 drop-sub-content-2">
@@ -382,8 +382,25 @@ const OptionQuestion = () => {
     )
 }
 const MultiOptionQuestion = () => {
-    const { qno, setQno } = useContext(QuestionContext);
+    const { qno, setQno, formData, setFormData } = useContext(QuestionContext);
+    const { setProgress } = useContext(AppContext);
     const [animate, setAnimate] = useState(false);
+    const [goals, setGoals] = useState([]);
+    const alpha = ['A', 'B', 'C', 'D', 'E'];
+    const RoleGoals = {
+        "Founder or CXO": [
+            "Structured approach to growth",
+            "Build a growth team",
+            "Connect with like - minded people"
+        ],
+        "Other": [
+            "Get hired",
+            "Get promoted",
+            "Connect with like - minded people",
+            "Structured approach to growth",
+            "Build a growth team"
+        ]
+    }
     useEffect(() => {
         const i = setTimeout(() => {
             qno === 1 && setAnimate(true);
@@ -392,13 +409,16 @@ const MultiOptionQuestion = () => {
             clearTimeout(i);
         }
     }, [qno]);
-    const changeOtherRole = (event) => {
-        if (otherRole.length === 0) {
-            alert("Please enter role !");
+    const getGoals = () => {
+        if (formData['role'] === 'Founder or CXO') {
+            setGoals(RoleGoals['Founder or CXO']);
+        } else {
+            setGoals(RoleGoals['Other']);
         }
-        setEnableText(false);
-        event.stopPropagation()
     }
+    useEffect(() => {
+        getGoals();
+    }, [formData])
     return (
         <>
             {
@@ -407,33 +427,21 @@ const MultiOptionQuestion = () => {
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>
-                                <span>5 →</span>
+                                <span className='qno-text'>5 →</span>
                                 <span>Johb, what's your professional goal for the next 12 months? *</span>
                             </div>
                             <div className="multi-drop-selected">
                                 Choose 2
                             </div>
                             <div className='options multi-options'>
-                                <div className='role-opt'>
-                                    <span className='role-opt-btn-key'>A</span>
-                                    <span className='role-opt-text'>Get hired</span>
-                                </div>
-                                <div className='role-opt'>
-                                    <span className='role-opt-btn-key'>B</span>
-                                    <div>Get promoted</div>
-                                </div>
-                                <div className='role-opt'>
-                                    <span className='role-opt-btn-key'>C</span>
-                                    <div className='role-opt-text'>Connect with like-minded people</div>
-                                </div>
-                                <div className='role-opt'>
-                                    <span className='role-opt-btn-key'>D</span>
-                                    <div className='role-opt-text'>Structured approach to growth</div>
-                                </div>
-                                <div className='role-opt'>
-                                    <span className='role-opt-btn-key'>E</span>
-                                    <div className='role-opt-text'>Build a growth team</div>
-                                </div>
+                                {
+                                    goals.map((goal, index) => {
+                                        return <div className='role-opt'>
+                                            <span className='role-opt-btn-key'>{alpha[index]}</span>
+                                            <span className='role-opt-text'>{goal}</span>
+                                        </div>
+                                    })
+                                }
                             </div>
                         </section>
                         <section className='actions'>
@@ -464,7 +472,7 @@ const EmailForm = () => {
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>
-                                <span>6 →</span>
+                                <span className='qno-text'>6 →</span>
                                 <span>Email you'd like to register with? *</span>
                             </div>
                             <div className="sub-content-2 drop-sub-content-2">
@@ -507,7 +515,7 @@ const PhoneForm = () => {
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>
-                                <span>7 →</span>
+                                <span className='qno-text'>7 →</span>
                                 <span>Your phone number *</span>
                             </div>
                             <div className="sub-content-2 drop-sub-content-2">

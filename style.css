@@ -91,6 +91,13 @@
 
 .header-text {
   color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.qno-text {
+  font-size: 16px;
 }
 
 .sub-content-1 {
