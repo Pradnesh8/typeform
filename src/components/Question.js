@@ -502,8 +502,11 @@ const MultiOptionQuestion = () => {
     )
 }
 const EmailForm = () => {
-    const { qno, setQno } = useContext(QuestionContext);
+    const { qno, setQno, formData, setFormData } = useContext(QuestionContext);
+    const { setProgress } = useContext(AppContext);
     const [animate, setAnimate] = useState(false);
+    const [error, setError] = useState('');
+    const [email, setEmail] = useState('');
     useEffect(() => {
         const i = setTimeout(() => {
             qno === 1 && setAnimate(true);
@@ -512,6 +515,23 @@ const EmailForm = () => {
             clearTimeout(i);
         }
     }, [qno]);
+    const handleSubmit = () => {
+        if (email.length === 0) {
+            setError("Please fill this in");
+        }
+        else if (!(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).test(email)) {
+            setError("Hmm... that email doesn't look right");
+        }
+        else {
+            setQno(prevQue => prevQue + 1)
+            const form = formData
+            form["email"] = email;
+            setFormData({ ...formData, ...form });
+            console.log("ss", Math.round(qno + 1 / 7 * 100));
+            setProgress(Math.round(6 / 7 * 100));
+            setError("");
+        }
+    }
     return (
         <>
             {
@@ -528,11 +548,18 @@ const EmailForm = () => {
                             </div>
                             <div className="sub-content-1">
                                 {/* <TextField id="standard-basic" label="Standard" variant="standard" fullWidth /> */}
-                                <input type="text" name="name" placeholder="name@example.com" id="name" autoComplete='name' className='input-text-field' />
+                                <input type="text" onChange={(e) => {
+                                    setEmail(e.target.value);
+                                    setError("");
+                                }} name="name" placeholder="name@example.com" id="name" autoComplete='name' className='input-text-field' value={email} />
                             </div>
+                            {
+                                error.length > 0 &&
+                                <ErrorAlert errMsg={error} />
+                            }
                         </section>
                         <section className='actions'>
-                            <button className='cta-btn' onClick={() => setQno(prevQue => prevQue + 1)}>OK ✓</button>
+                            <button className='cta-btn' onClick={handleSubmit}>OK ✓</button>
                             <div className='cta-text'>press <b>Enter ↵</b></div>
                         </section>
                     </div>
@@ -542,7 +569,9 @@ const EmailForm = () => {
     )
 }
 const PhoneForm = () => {
-    const { qno, setQno } = useContext(QuestionContext);
+    const { qno, setQno, formData, setFormData } = useContext(QuestionContext);
+    const { setProgress } = useContext(AppContext);
+    const [error, setError] = useState("");
     const [animate, setAnimate] = useState(false);
     const [phone, setPhone] = useState("");
     const [selector, setSelector] = useState(false);
@@ -555,6 +584,23 @@ const PhoneForm = () => {
             clearTimeout(i);
         }
     }, [qno]);
+    const handleSubmit = () => {
+        if (phone.length === 0) {
+            setError("Please fill this in");
+        }
+        else if (!(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*/).test(phone) || phone.length > 15) {
+            setError("Hmm... that phone number doesn't look right");
+        }
+        else {
+            setQno(prevQue => prevQue + 1)
+            const form = formData
+            form["phone"] = phone;
+            setFormData({ ...formData, ...form });
+            console.log("ss", Math.round(qno + 1 / 7 * 100));
+            setProgress(Math.round(7 / 7 * 100));
+            setError("");
+        }
+    }
     return (
         <>
             {
@@ -589,13 +635,22 @@ const PhoneForm = () => {
                                 }
                                 {
                                     !selector &&
-                                    <input type="tel" name="name" onChange={(e) => setPhone(e.target.value)} placeholder="081234 56789" id="name" autoComplete='tel-national' className='input-text-field phone-field' value={phone} />
+                                    <input type="tel" name="name" onChange={(e) => {
+                                        const re = /^[0-9\b]+$/;
+                                        if (e.target.value === '' || re.test(e.target.value)) {
+                                            setPhone(e.target.value);
+                                            setError("");
+                                        }
+                                    }} placeholder="081234 56789" id="name" autoComplete='tel-national' className='input-text-field phone-field' value={phone} />
                                 }
                             </div>
+                            {
+                                error.length > 0 &&
+                                <ErrorAlert errMsg={error} />
+                            }
                         </section>
-                        <section className='actions'>
-                            <button className='cta-btn' onClick={() => setQno(prevQue => prevQue + 1)}>OK ✓</button>
-                            <div className='cta-text'>press <b>Enter ↵</b></div>
+                        <section className='actions submit-actions'>
+                            <button className='cta-btn cta-btn-submit' onClick={handleSubmit}>Submit</button>
                         </section>
                     </div>
                 </div>

@@ -119,7 +119,9 @@
   align-items: center;
   gap: 1rem;
 }
-
+.submit-actions {
+  justify-content: center;
+}
 .cta-btn {
   cursor: pointer;
   padding: 0.5rem 1rem;
@@ -131,7 +133,9 @@
   color: white;
   margin-left: 40px;
 }
-
+.cta-btn-submit {
+  margin-left: 0;
+}
 .cta-text {
   padding-top: 5px;
   font-size: 12px;
