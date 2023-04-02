@@ -5,6 +5,7 @@ import QuestionContext from '../utils/QuestionContext';
 const Body = () => {
     const [qno, setQno] = useState(0);
     const [countryName, setCountryName] = useState("in");
+    const [formData, setFormData] = useState({});
     /**
      * Type of Question
      *  - Agreement 
@@ -29,7 +30,9 @@ const Body = () => {
             qno,
             setQno,
             countryName,
-            setCountryName
+            setCountryName,
+            formData,
+            setFormData
         }}>
             <div className='main-wrapper'>
                 <Question type="agreement" />
