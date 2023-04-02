@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 import ReactDOM from "react-dom/client"
 import Body from "./components/Body";
 import Progress from "./components/progress";
 import growthXLogo from './../assets/growthX-full-logo.png';
+import AppContext from "./utils/AppContext";
 
 const App = () => {
+    const [progress, setProgress] = useState(0);
     /**
      * Progress bar
      * MainContent
@@ -28,15 +30,17 @@ const App = () => {
      *          - Button [Ok/Submit]
      */
     return (
-        <div className="container">
-            <div className="header-block">
-                <Progress />
-                <div className='head'>
-                    <img className='logo' src={growthXLogo} alt="logo" />
+        <AppContext.Provider value={{ progress, setProgress }}>
+            <div className="container">
+                <div className="header-block">
+                    <Progress />
+                    <div className='head'>
+                        <img className='logo' src={growthXLogo} alt="logo" />
+                    </div>
                 </div>
+                <Body />
             </div>
-            <Body />
-        </div>
+        </AppContext.Provider>
     )
 }
 
