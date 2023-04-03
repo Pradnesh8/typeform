@@ -1,6 +1,15 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Question from './Question'
 import QuestionContext from '../utils/QuestionContext';
+import Agreement from './Agreement';
+import TextQuestion from './TextQuestion';
+import TextQuestion2 from './TextQuestion2';
+import DropdownQuestion from './DropdownQuestion';
+import OptionQuestion from './OptionQuestion';
+import MultiOptionQuestion from './MultiOptionQuestion';
+import EmailForm from './EmailForm';
+import PhoneForm from './PhoneForm';
+import ThankYou from './ThankYou';
 
 const Body = () => {
     const [qno, setQno] = useState(0);
@@ -16,14 +25,20 @@ const Body = () => {
      *  - email
      *  - phone
      */
-    // useEffect(() => {
-    //     const i = setTimeout(() => {
-    //         setQno(0);
-    //     }, 300)
-    //     return () => {
-    //         clearTimeout(i);
-    //     }
-    // }, [qno]);
+    useEffect(() => {
+        const options = {
+            behavior: 'smooth',
+            block: 'center'
+        };
+        const i = setTimeout(() => {
+            const q = `q${qno}`;
+            document.getElementById(q)?.scrollIntoView(options);
+        }, 300)
+        return () => {
+            clearTimeout(i);
+        }
+    }, [qno]);
+
     return (
         // TODO on scroll update question && check if response given is valid
         <QuestionContext.Provider value={{
@@ -35,15 +50,41 @@ const Body = () => {
             setFormData
         }}>
             <div className='main-wrapper'>
-                <Question type="agreement" />
-                <Question type="text" />
-                <Question type="text2" />
-                <Question type="dropdown" />
-                <Question type="option" />
-                <Question type="multi-option" />
-                {/* <Question type="multi-option2" /> */}
-                <Question type="email" />
-                <Question type="phone" />
+                {
+                    qno >= 0 &&
+                    <Agreement />
+                }
+                {
+                    qno > 0 &&
+                    <TextQuestion />
+                }
+                {
+                    qno > 1 &&
+                    <TextQuestion2 />
+                }
+                {
+                    qno > 2 &&
+                    <DropdownQuestion />
+                }
+                {
+                    qno > 3 &&
+                    <OptionQuestion />
+                }{
+                    qno > 4 &&
+                    <MultiOptionQuestion />
+                }
+                {
+                    qno > 5 &&
+                    <EmailForm />
+                }
+                {
+                    qno > 6 &&
+                    <PhoneForm />
+                }
+                {
+                    qno === 'done' &&
+                    <ThankYou />
+                }
             </div>
         </QuestionContext.Provider>
     )
