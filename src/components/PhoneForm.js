@@ -9,7 +9,7 @@ const PhoneForm = () => {
     const { setProgress } = useContext(AppContext);
     const [error, setError] = useState("");
     const [animate, setAnimate] = useState(false);
-    const [phone, setPhone] = useState("");
+    const [phone, setPhone] = useState(formData['phone'] ? formData['phone'] : '');
     const [selector, setSelector] = useState(false);
     const { countryName } = useContext(QuestionContext);
     useEffect(() => {

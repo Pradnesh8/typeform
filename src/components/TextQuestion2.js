@@ -7,7 +7,7 @@ const TextQuestion2 = () => {
     const { setProgress } = useContext(AppContext);
     const [animate, setAnimate] = useState(false);
     const [error, setError] = useState('');
-    const [secName, setSecName] = useState('');
+    const [secName, setSecName] = useState(formData['lastName'] ? formData['lastName'] : '');
     useEffect(() => {
         const i = setTimeout(() => {
             qno === 1 && setAnimate(true);

@@ -8,7 +8,7 @@ const EmailForm = () => {
     const { setProgress } = useContext(AppContext);
     const [animate, setAnimate] = useState(false);
     const [error, setError] = useState('');
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(formData['email'] ? formData['email'] : '');
     useEffect(() => {
         const i = setTimeout(() => {
             qno === 1 && setAnimate(true);

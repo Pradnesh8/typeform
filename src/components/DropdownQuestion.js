@@ -10,8 +10,8 @@ const DropdownQuestion = () => {
     const { setProgress } = useContext(AppContext);
     const [animate, setAnimate] = useState(false);
     const [drop, setDrop] = useState(false);
-    const [industry, setIndustry] = useState("");
-    const [search, setSearch] = useState("");
+    const [industry, setIndustry] = useState(formData['industry'] ? formData['industry'] : '');
+    const [search, setSearch] = useState(formData['industry'] ? formData['industry'] : '');
     const [error, setError] = useState('');
     const [filteredIndustryList, setFilteredIndustryList] = useState(industryList);
     useEffect(() => {
