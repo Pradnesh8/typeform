@@ -20,8 +20,9 @@ const TextQuestion2 = () => {
         if (secName.length === 0) {
             setProgress(Math.round(1 / 7 * 100));
             setError("Please fill this in");
+            setQno(2);
         } else {
-            setQno(prevQue => prevQue + 1)
+            setQno(3)
             const form = formData
             form["lastName"] = secName;
             setFormData({ ...formData, ...form });
@@ -34,7 +35,7 @@ const TextQuestion2 = () => {
         <>
             {
                 /*+ (qno >= 2 && animate && 'sub-container-visible')*/
-                <div className={'sub-container'}>
+                <div className={'sub-container'} id='q2'>
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>

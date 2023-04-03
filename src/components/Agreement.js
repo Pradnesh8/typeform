@@ -14,7 +14,7 @@ const Agreement = () => {
         }
     }, []);
     const handleSubmit = () => {
-        setQno(prevQue => prevQue + 1);
+        setQno(1);
     }
     return (
         /*+ (qno === 0 && animate && 'sub-container-visible')*/

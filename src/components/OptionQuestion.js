@@ -60,8 +60,9 @@ const OptionQuestion = () => {
     const handleSubmit = () => {
         if (role.length === 0) {
             setError("Oops! Please make a selection");
+            setQno(4);
         } else {
-            setQno(prevQue => prevQue + 1)
+            setQno(5)
             const form = formData
             form["role"] = role;
             setFormData({ ...formData, ...form });
@@ -74,7 +75,7 @@ const OptionQuestion = () => {
         <>
             {
                 /*+ (qno >= 2 && animate && 'sub-container-visible')*/
-                <div className={'sub-container'} onKeyPress={(e) => handleKeyPress(e)}>
+                <div className={'sub-container'} onKeyPress={(e) => handleKeyPress(e)} id="q4">
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>
@@ -85,23 +86,23 @@ const OptionQuestion = () => {
                                 We want to understand how you spend your time right now.
                             </div>
                             <div className='options role-options'>
-                                <div className={formData["role"] === 'Founder or CXO' ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("Founder or CXO")}>
+                                <div key={crypto.randomUUID()} className={formData["role"] === 'Founder or CXO' ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("Founder or CXO")}>
                                     <span className='role-opt-btn-key'>A</span>
                                     <span className='role-opt-text'>Founder or CXO</span>
                                 </div>
-                                <div className={formData["role"] === "Product team" ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("Product team")}>
+                                <div key={crypto.randomUUID()} className={formData["role"] === "Product team" ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("Product team")}>
                                     <span className='role-opt-btn-key'>B</span>
                                     <div>Product team</div>
                                 </div>
-                                <div className={formData["role"] === "Marketing team" ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("Marketing team")}>
+                                <div key={crypto.randomUUID()} className={formData["role"] === "Marketing team" ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("Marketing team")}>
                                     <span className='role-opt-btn-key'>C</span>
                                     <div className='role-opt-text'>Marketing team</div>
                                 </div>
-                                <div className={formData["role"] === "VC" ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("VC")}>
+                                <div key={crypto.randomUUID()} className={formData["role"] === "VC" ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("VC")}>
                                     <span className='role-opt-btn-key'>D</span>
                                     <div className='role-opt-text'>VC</div>
                                 </div>
-                                <div className={formData["role"] === otherRole ? 'role-opt selected-option' : 'role-opt'} onClick={() => setEnableText(true)} >
+                                <div key={crypto.randomUUID()} className={formData["role"] === otherRole ? 'role-opt selected-option' : 'role-opt'} onClick={() => setEnableText(true)} >
                                     {!enableText && <span className='role-opt-btn-key'>E</span>}
                                     <div className='role-opt-text'>
                                         {

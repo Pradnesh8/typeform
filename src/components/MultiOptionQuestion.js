@@ -77,15 +77,17 @@ const MultiOptionQuestion = () => {
         const form = formData
         if (form["goals"]?.length !== 2) {
             setError("Oops! Please make a selection");
+            setQno(5);
         } else {
             console.log("next");
+            setQno(6)
         }
     }
     return (
         <>
             {
                 /*+ (qno >= 2 && animate && 'sub-container-visible')*/
-                <div className={'sub-container'}>
+                <div className={'sub-container'} id="q5">
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>
@@ -101,7 +103,7 @@ const MultiOptionQuestion = () => {
                             <div className='options multi-options'>
                                 {
                                     goals.map((goal, index) => {
-                                        return <div className={formData["goals"]?.includes(goal) ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect(goal)}>
+                                        return <div key={crypto.randomUUID()} className={formData["goals"]?.includes(goal) ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect(goal)}>
                                             <span className='role-opt-btn-key'>{alpha[index]}</span>
                                             <span className='role-opt-text'>{goal}</span>
                                         </div>

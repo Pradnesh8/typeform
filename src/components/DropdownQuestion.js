@@ -50,8 +50,9 @@ const DropdownQuestion = () => {
         if (industry.length === 0) {
             setProgress(Math.round(2 / 7 * 100));
             setError("Oops! Please make a selection");
+            setQno(3);
         } else {
-            setQno(prevQue => prevQue + 1)
+            setQno(4)
             const form = formData
             form["industry"] = industry;
             setFormData({ ...formData, ...form });
@@ -64,7 +65,7 @@ const DropdownQuestion = () => {
         <>
             {
                 /*+ (qno >= 2 && animate && 'sub-container-visible')*/
-                <div className={'sub-container dropdownq'}>
+                <div className={'sub-container dropdownq'} id='q3'>
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>

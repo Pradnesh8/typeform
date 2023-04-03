@@ -23,9 +23,11 @@ const PhoneForm = () => {
     const handleSubmit = () => {
         if (phone.length === 0) {
             setError("Please fill this in");
+            setQno(7)
         }
         else if (!(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*/).test(phone) || phone.length > 15 || phone.length < 10) {
             setError("Hmm... that phone number doesn't look right");
+            setQno(7);
         }
         else {
             setQno(prevQue => prevQue + 1)
@@ -35,13 +37,14 @@ const PhoneForm = () => {
             console.log("ss", Math.round(qno + 1 / 7 * 100));
             setProgress(Math.round(7 / 7 * 100));
             setError("");
+            setQno("done");
         }
     }
     return (
         <>
             {
                 /*+ (qno >= 1 && animate && 'sub-container-visible')*/
-                <div className={'sub-container'}>
+                <div className={'sub-container'} id="q7">
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>

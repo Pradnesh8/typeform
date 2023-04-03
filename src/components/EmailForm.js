@@ -23,9 +23,10 @@ const EmailForm = () => {
         }
         else if (!(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).test(email)) {
             setError("Hmm... that email doesn't look right");
+            setQno(6);
         }
         else {
-            setQno(prevQue => prevQue + 1)
+            setQno(7);
             const form = formData
             form["email"] = email;
             setFormData({ ...formData, ...form });
@@ -38,7 +39,7 @@ const EmailForm = () => {
         <>
             {
                 /*+ (qno >= 1 && animate && 'sub-container-visible')*/
-                <div className={'sub-container'}>
+                <div className={'sub-container'} id="q6">
                     <div className='question-container'>
                         <section className='content'>
                             <div className='header-text'>
@@ -53,7 +54,7 @@ const EmailForm = () => {
                                 <input type="text" onChange={(e) => {
                                     setEmail(e.target.value);
                                     setError("");
-                                }} name="name" placeholder="name@example.com" id="name" autoComplete='name' className='input-text-field' value={email} />
+                                }} name="name" placeholder="name@example.com" id="name" autoComplete='email' className='input-text-field' value={email} />
                             </div>
                             {
                                 error.length > 0 &&
