@@ -461,6 +461,9 @@ form {
   .showError {
     margin-left: 5px;
   }
+  .country-dropdown {
+    margin-left: 0;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
