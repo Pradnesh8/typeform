@@ -221,7 +221,23 @@ input[type="text"]:focus {
 }
 
 .selected-option {
+  animation: blinker 500ms linear 1;
   background: #8f8c8c;
+}
+
+@keyframes blinker {
+  25% {
+    opacity: 0%;
+  }
+  50% {
+    opacity: 100%;
+  }
+  75% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
 }
 
 .role-opt-btn-key {
