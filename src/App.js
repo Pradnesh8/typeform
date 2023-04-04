@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import ReactDOM from "react-dom/client"
 import Body from "./components/Body";
-import Progress from "./components/progress";
+import Progress from "./components/Progress";
 import growthXLogo from './../assets/growthX-full-logo.png';
 import AppContext from "./utils/AppContext";
 
