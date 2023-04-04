@@ -33,7 +33,7 @@ const Body = () => {
                 },
                 body: JSON.stringify(data),
             });
-            console.log("Success:", response);
+            console.log("Successfully submitted the form");
             localStorage.removeItem('typeform');
         } catch (error) {
             console.error("Error:", error);
