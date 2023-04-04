@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { phoneCodes } from '../utils/helper';
 import QuestionContext from '../utils/QuestionContext';
 
 const CountryDropdown = ({ handleSelect }) => {
@@ -12,9 +13,8 @@ const CountryDropdown = ({ handleSelect }) => {
         const json = await data.json();
         setCountryList(json);
         setFilteredCountryList(json);
-        const phoneData = await fetch("http://country.io/phone.json");
-        const jsondata = await phoneData.json();
-        setCountryCode(jsondata)
+        const phoneData = phoneCodes;
+        setCountryCode(phoneData);
     }
     const selectCountry = (country) => {
         setCountryName(country);
