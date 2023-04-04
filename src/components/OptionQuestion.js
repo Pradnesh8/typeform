@@ -43,22 +43,12 @@ const OptionQuestion = () => {
     }
     const changeOtherRole = (event) => {
         if (otherRole.length === 0) {
-            alert("Please enter role !");
+            setError("Please enter role !");
         }
         setEnableText(false);
         handleSelect(otherRole);
         event.stopPropagation()
     }
-    const handleKeyPress = (event) => {
-        console.log(event.key)
-        setKeyPressed(event.key)
-    }
-    useEffect(() => {
-        // TODO handle event listener
-        // TODO select div as per keypress
-        addEventListener("keypress", handleKeyPress);
-        return () => removeEventListener("keypress", handleKeyPress);
-    }, [])
     const handleSubmit = (e) => {
         e.preventDefault();
         if (role.length === 0) {
@@ -78,7 +68,7 @@ const OptionQuestion = () => {
         <>
             {
                 /*+ (qno >= 2 && animate && 'sub-container-visible')*/
-                <div className={'sub-container'} onKeyPress={(e) => handleKeyPress(e)} id="q4">
+                <div className={'sub-container'} id="q4">
                     <form onSubmit={handleSubmit}>
                         <div className='question-container'>
                             <section className='content'>
