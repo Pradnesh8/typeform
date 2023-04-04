@@ -27,7 +27,6 @@ const TextQuestion2 = () => {
             const form = formData
             form["lastName"] = secName;
             setFormData({ ...formData, ...form });
-            console.log("ss", Math.round(qno + 1 / 7 * 100));
             setProgress(Math.round(2 / 7 * 100));
             setError("");
         }

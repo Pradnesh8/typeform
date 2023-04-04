@@ -12,7 +12,6 @@ const CountryDropdown = ({ handleSelect }) => {
         const json = await data.json();
         setCountryList(json);
         setFilteredCountryList(json);
-        console.log("JSON", json);
         const phoneData = await fetch("http://country.io/phone.json");
         const jsondata = await phoneData.json();
         setCountryCode(jsondata)

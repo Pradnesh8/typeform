@@ -27,7 +27,6 @@ const OptionQuestion = () => {
             delete form['role']
             setFormData({ ...formData, ...form });
             setQno(4);
-            console.log("ss", Math.round(qno + 1 / 7 * 100));
             setProgress(Math.round(3 / 7 * 100));
             setRole("");
         } else {
@@ -35,7 +34,6 @@ const OptionQuestion = () => {
             form["role"] = roleName;
             form["goals"] = [];
             setFormData({ ...formData, ...form });
-            console.log("ss", Math.round(qno + 1 / 7 * 100));
             setProgress(Math.round(4 / 7 * 100));
             setError("");
             setRole(roleName);
@@ -59,7 +57,6 @@ const OptionQuestion = () => {
             const form = formData
             form["role"] = role;
             setFormData({ ...formData, ...form });
-            console.log("ss", Math.round(qno + 1 / 7 * 100));
             setProgress(Math.round(4 / 7 * 100));
             setError("");
         }

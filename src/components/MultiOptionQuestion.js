@@ -47,7 +47,6 @@ const MultiOptionQuestion = () => {
                 }
             }
             setFormData({ ...formData, ...form });
-            console.log("ss", Math.round(qno + 1 / 7 * 100));
             setProgress(Math.round(4 / 7 * 100));
             setError("");
         } else {
@@ -57,7 +56,6 @@ const MultiOptionQuestion = () => {
                 const form = formData
                 form["goals"] ? form["goals"].push(_goal) : form["goals"] = [_goal];
                 setFormData({ ...formData, ...form });
-                console.log("ss", Math.round(qno + 1 / 7 * 100));
                 if (form["goals"].length === 2) {
                     setProgress(Math.round(5 / 7 * 100))
                 } else {
@@ -85,7 +83,6 @@ const MultiOptionQuestion = () => {
             setError("Oops! Please make a selection");
             setQno(5);
         } else {
-            console.log("next");
             setQno(6)
         }
     }

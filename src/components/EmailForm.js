@@ -32,7 +32,6 @@ const EmailForm = () => {
             const form = formData
             form["email"] = email;
             setFormData({ ...formData, ...form });
-            console.log("ss", Math.round(qno + 1 / 7 * 100));
             setProgress(Math.round(6 / 7 * 100));
             setError("");
         }

@@ -35,7 +35,6 @@ const PhoneForm = () => {
             const form = formData
             form["phone"] = phone;
             setFormData({ ...formData, ...form });
-            console.log("ss", Math.round(qno + 1 / 7 * 100));
             setProgress(Math.round(7 / 7 * 100));
             setError("");
             setQno("done");
