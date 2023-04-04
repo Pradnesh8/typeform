@@ -24,16 +24,32 @@ const Body = () => {
      *  - email
      *  - phone
      */
+    const sendSubmissionMail = async (data) => {
+        try {
+            const response = await fetch("https://eofuy07o0ix5vec.m.pipedream.net", {
+                method: "POST", // or 'PUT'
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+            console.log("Success:", response);
+            localStorage.removeItem('typeform');
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
     useEffect(() => {
         const options = {
             behavior: 'smooth',
             block: 'center'
         };
         const i = setTimeout(() => {
+            const data = localStorage.getItem('typeform');
             const q = `q${qno}`;
             document.getElementById(q)?.scrollIntoView(options);
             if (qno === 'done') {
-                localStorage.removeItem('typeform')
+                sendSubmissionMail(JSON.parse(data));
             }
         }, 300)
         return () => {
@@ -53,7 +69,6 @@ const Body = () => {
     }, [formData])
 
     return (
-        // TODO on scroll update question && check if response given is valid
         <QuestionContext.Provider value={{
             qno,
             setQno,
