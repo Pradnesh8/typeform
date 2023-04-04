@@ -25,6 +25,7 @@ const DropdownQuestion = () => {
     const filterIndustry = () => {
         const filteredIndustries = industryList.filter(industry => industry.toLowerCase().includes(search.toLowerCase()));
         setFilteredIndustryList(filteredIndustries);
+        filteredIndustries.length === 0 && setError("No suggestions found")
         search.length > 0 && industry === "" && setDrop(true);
     }
     useEffect(() => {
@@ -60,7 +61,6 @@ const DropdownQuestion = () => {
             const form = formData
             form["industry"] = industry;
             setFormData({ ...formData, ...form });
-            console.log("ss", Math.round(qno + 1 / 7 * 100));
             setProgress(Math.round(3 / 7 * 100));
             setError("");
         }
