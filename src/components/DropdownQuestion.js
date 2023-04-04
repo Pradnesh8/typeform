@@ -40,13 +40,17 @@ const DropdownQuestion = () => {
         setSearch("");
         setIndustry("");
         setDrop(true);
+        setQno(3);
+        const form = formData
+        delete form["industry"];
     }
     const handleSelect = (industryName) => {
         setSearch(industryName);
         setIndustry(industryName);
         setDrop(false);
     }
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         if (industry.length === 0) {
             setProgress(Math.round(2 / 7 * 100));
             setError("Oops! Please make a selection");
@@ -66,50 +70,52 @@ const DropdownQuestion = () => {
             {
                 /*+ (qno >= 2 && animate && 'sub-container-visible')*/
                 <div className={'sub-container dropdownq'} id='q3'>
-                    <div className='question-container'>
-                        <section className='content'>
-                            <div className='header-text'>
-                                <span className='qno-text'>3 →</span>
-                                <span>What industry is your company in? *</span>
-                            </div>
-                            <div className="sub-content-2 drop-sub-content-2">
-                                We will personalize your learning experience accordingly
-                            </div>
-                            <div className="sub-content-1">
-                                <div className='drop-input'>
-                                    <input type="text" onChange={(e) => setSearch(e.target.value)} name="industry" id="industy" className='industry-dropdown' placeholder="Type or select an option" value={search} />
-                                    {
-                                        industry === search && search.length > 0 ?
-                                            <span className='drop-icon' onClick={handleReset}>×</span> :
-                                            (
-                                                !drop ?
-                                                    <span className='drop-icon' onClick={() => setDrop(true)}>∨</span>
-                                                    :
-                                                    <span className='drop-icon' onClick={() => setDrop(false)}>ʌ</span>
-                                            )
-                                    }
+                    <form onSubmit={handleSubmit}>
+                        <div className='question-container'>
+                            <section className='content'>
+                                <div className='header-text'>
+                                    <span className='qno-text'>3 →</span>
+                                    <span>What industry is your company in? *</span>
                                 </div>
-                                <div className='dropdown-list'>
-                                    {
-                                        drop &&
-                                        filteredIndustryList.map((industryName, index) => {
-                                            return <button className='options' key={industryName + index} onClick={() => handleSelect(industryName)}>{industryName}</button>
-                                        })
-                                    }
+                                <div className="sub-content-2 drop-sub-content-2">
+                                    We will personalize your learning experience accordingly
                                 </div>
-                            </div>
-                            {
-                                (error.length > 0 && industry.length === 0) &&
-                                <ErrorAlert errMsg={error} />
-                            }
-                        </section>
-                        {
-                            !drop &&
-                            <section className='actions'>
-                                <button className='cta-btn' onClick={handleSubmit}>OK ✓</button>
+                                <div className="sub-content-1">
+                                    <div className='drop-input'>
+                                        <input type="text" onChange={(e) => setSearch(e.target.value)} name="industry" id="industy" className='industry-dropdown' placeholder="Type or select an option" value={search} />
+                                        {
+                                            industry === search && search.length > 0 ?
+                                                <span className='drop-icon' onClick={handleReset}>×</span> :
+                                                (
+                                                    !drop ?
+                                                        <span className='drop-icon' onClick={() => setDrop(true)}>∨</span>
+                                                        :
+                                                        <span className='drop-icon' onClick={() => setDrop(false)}>ʌ</span>
+                                                )
+                                        }
+                                    </div>
+                                    <div className='dropdown-list'>
+                                        {
+                                            drop &&
+                                            filteredIndustryList.map((industryName, index) => {
+                                                return <button className='options' key={industryName + index} onClick={() => handleSelect(industryName)}>{industryName}</button>
+                                            })
+                                        }
+                                    </div>
+                                </div>
+                                {
+                                    (error.length > 0 && industry.length === 0) &&
+                                    <ErrorAlert errMsg={error} />
+                                }
                             </section>
-                        }
-                    </div>
+                            {
+                                !drop &&
+                                <section className='actions'>
+                                    <button type='submit' className='cta-btn' onClick={handleSubmit}>OK ✓</button>
+                                </section>
+                            }
+                        </div>
+                    </form>
                 </div>
             }
         </>

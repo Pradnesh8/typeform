@@ -378,3 +378,8 @@ input[type="text"]:focus {
   color: white;
   font-size: 24px;
 }
+
+form {
+  margin: 0;
+  padding: 0;
+}

@@ -36,6 +36,7 @@ const MultiOptionQuestion = () => {
     const handleSelect = (_goal) => {
         const form = formData
         if (form["goals"] && form["goals"].includes(_goal)) {
+            setQno(5);
             if (form['goals'].includes(_goal)) {
                 form['goals'] = form['goals'].filter(g => g !== _goal);
                 if (form['goals'].length === 0) {
@@ -57,7 +58,12 @@ const MultiOptionQuestion = () => {
                 form["goals"] ? form["goals"].push(_goal) : form["goals"] = [_goal];
                 setFormData({ ...formData, ...form });
                 console.log("ss", Math.round(qno + 1 / 7 * 100));
-                form["goals"].length === 2 ? setProgress(Math.round(5 / 7 * 100)) : setProgress(Math.round(4 / 7 * 100));
+                if (form["goals"].length === 2) {
+                    setProgress(Math.round(5 / 7 * 100))
+                } else {
+                    setProgress(Math.round(4 / 7 * 100));
+                    setQno(5);
+                }
                 setError("");
                 setSelGoals(form["goals"]);
             }

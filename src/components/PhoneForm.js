@@ -20,7 +20,8 @@ const PhoneForm = () => {
             clearTimeout(i);
         }
     }, [qno]);
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         if (phone.length === 0) {
             setError("Please fill this in");
             setQno(7)
@@ -45,53 +46,55 @@ const PhoneForm = () => {
             {
                 /*+ (qno >= 1 && animate && 'sub-container-visible')*/
                 <div className={'sub-container'} id="q7">
-                    <div className='question-container'>
-                        <section className='content'>
-                            <div className='header-text'>
-                                <span className='qno-text'>7 →</span>
-                                <span>Your phone number *</span>
-                            </div>
-                            <div className="sub-content-2 drop-sub-content-2">
-                                We won't call you unless it is absolutely required to process your application.
-                            </div>
-                            <div className="sub-content-1 sub-content-1-phone">
-                                {/* <TextField id="standard-basic" label="Standard" variant="standard" fullWidth /> */}
+                    <form onSubmit={handleSubmit}>
+                        <div className='question-container'>
+                            <section className='content'>
+                                <div className='header-text'>
+                                    <span className='qno-text'>7 →</span>
+                                    <span>Your phone number *</span>
+                                </div>
+                                <div className="sub-content-2 drop-sub-content-2">
+                                    We won't call you unless it is absolutely required to process your application.
+                                </div>
+                                <div className="sub-content-1 sub-content-1-phone">
+                                    {/* <TextField id="standard-basic" label="Standard" variant="standard" fullWidth /> */}
+                                    {
+                                        !selector ?
+                                            <div className='country-selected' onClick={() => setSelector(true)}>
+                                                <img
+                                                    src={"https://flagcdn.com/20x15/" + countryName + ".png"}
+                                                    srcSet={"https://flagcdn.com/40x30/" + countryName + ".png 2x,https://flagcdn.com/60x45/" + countryName + ".png 3x"}
+                                                    width="20"
+                                                    height="15"
+                                                    className='country-flag'
+                                                    alt={"country"} />
+                                                <span id='drop-icon'>⋁</span>
+                                            </div> :
+                                            <div className='country-dropdown'>
+                                                <CountryDropdown handleSelect={setSelector} />
+                                            </div>
+                                    }
+                                    {
+                                        !selector &&
+                                        <input type="tel" name="name" onChange={(e) => {
+                                            const re = /^[0-9\b]+$/;
+                                            if (e.target.value === '' || re.test(e.target.value)) {
+                                                setPhone(e.target.value);
+                                                setError("");
+                                            }
+                                        }} placeholder="081234 56789" id="name" autoComplete='tel-national' className='input-text-field phone-field' value={phone} />
+                                    }
+                                </div>
                                 {
-                                    !selector ?
-                                        <div className='country-selected' onClick={() => setSelector(true)}>
-                                            <img
-                                                src={"https://flagcdn.com/20x15/" + countryName + ".png"}
-                                                srcSet={"https://flagcdn.com/40x30/" + countryName + ".png 2x,https://flagcdn.com/60x45/" + countryName + ".png 3x"}
-                                                width="20"
-                                                height="15"
-                                                className='country-flag'
-                                                alt={"country"} />
-                                            <span id='drop-icon'>⋁</span>
-                                        </div> :
-                                        <div className='country-dropdown'>
-                                            <CountryDropdown handleSelect={setSelector} />
-                                        </div>
+                                    error.length > 0 &&
+                                    <ErrorAlert errMsg={error} />
                                 }
-                                {
-                                    !selector &&
-                                    <input type="tel" name="name" onChange={(e) => {
-                                        const re = /^[0-9\b]+$/;
-                                        if (e.target.value === '' || re.test(e.target.value)) {
-                                            setPhone(e.target.value);
-                                            setError("");
-                                        }
-                                    }} placeholder="081234 56789" id="name" autoComplete='tel-national' className='input-text-field phone-field' value={phone} />
-                                }
-                            </div>
-                            {
-                                error.length > 0 &&
-                                <ErrorAlert errMsg={error} />
-                            }
-                        </section>
-                        <section className='actions submit-actions'>
-                            <button className='cta-btn cta-btn-submit' onClick={handleSubmit}>Submit</button>
-                        </section>
-                    </div>
+                            </section>
+                            <section className='actions submit-actions'>
+                                <button className='cta-btn cta-btn-submit' type='submit' onClick={handleSubmit}>Submit</button>
+                            </section>
+                        </div>
+                    </form>
                 </div>
             }
         </>

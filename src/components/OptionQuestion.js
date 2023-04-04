@@ -26,6 +26,7 @@ const OptionQuestion = () => {
             const form = formData
             delete form['role']
             setFormData({ ...formData, ...form });
+            setQno(4);
             console.log("ss", Math.round(qno + 1 / 7 * 100));
             setProgress(Math.round(3 / 7 * 100));
             setRole("");
@@ -58,7 +59,8 @@ const OptionQuestion = () => {
         addEventListener("keypress", handleKeyPress);
         return () => removeEventListener("keypress", handleKeyPress);
     }, [])
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         if (role.length === 0) {
             setError("Oops! Please make a selection");
             setQno(4);
@@ -77,54 +79,56 @@ const OptionQuestion = () => {
             {
                 /*+ (qno >= 2 && animate && 'sub-container-visible')*/
                 <div className={'sub-container'} onKeyPress={(e) => handleKeyPress(e)} id="q4">
-                    <div className='question-container'>
-                        <section className='content'>
-                            <div className='header-text'>
-                                <span className='qno-text'>4 →</span>
-                                <span>Your role in your company? *</span>
-                            </div>
-                            <div className="sub-content-2 drop-sub-content-2">
-                                We want to understand how you spend your time right now.
-                            </div>
-                            <div className='options role-options'>
-                                <div key={'founderRole'} className={formData["role"] === 'Founder or CXO' ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("Founder or CXO")}>
-                                    <span className='role-opt-btn-key'>A</span>
-                                    <span className='role-opt-text'>Founder or CXO</span>
+                    <form onSubmit={handleSubmit}>
+                        <div className='question-container'>
+                            <section className='content'>
+                                <div className='header-text'>
+                                    <span className='qno-text'>4 →</span>
+                                    <span>Your role in your company? *</span>
                                 </div>
-                                <div key={'productteamRole'} className={formData["role"] === "Product team" ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("Product team")}>
-                                    <span className='role-opt-btn-key'>B</span>
-                                    <div>Product team</div>
+                                <div className="sub-content-2 drop-sub-content-2">
+                                    We want to understand how you spend your time right now.
                                 </div>
-                                <div key={'marketingRole'} className={formData["role"] === "Marketing team" ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("Marketing team")}>
-                                    <span className='role-opt-btn-key'>C</span>
-                                    <div className='role-opt-text'>Marketing team</div>
-                                </div>
-                                <div key={'vcRole'} className={formData["role"] === "VC" ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("VC")}>
-                                    <span className='role-opt-btn-key'>D</span>
-                                    <div className='role-opt-text'>VC</div>
-                                </div>
-                                <div key={'otherrole'} className={formData["role"] === otherRole ? 'role-opt selected-option' : 'role-opt'} onClick={() => setEnableText(true)} >
-                                    {!enableText && <span className='role-opt-btn-key'>E</span>}
-                                    <div className='role-opt-text'>
-                                        {
-                                            enableText ?
-                                                <input type="text" className='input-text-field-role' onChange={(e) => setOtherRole(e.target.value)} name="role-other" id="role-other" value={otherRole} /> :
-                                                <span>{otherRole.length > 0 ? otherRole : "Other"}</span>
-                                        }
+                                <div className='options role-options'>
+                                    <div key={'founderRole'} className={formData["role"] === 'Founder or CXO' ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("Founder or CXO")}>
+                                        <span className='role-opt-btn-key'>A</span>
+                                        <span className='role-opt-text'>Founder or CXO</span>
                                     </div>
-                                    {enableText && <span onClick={changeOtherRole} className='role-text-btn-submit'>✓</span>}
+                                    <div key={'productteamRole'} className={formData["role"] === "Product team" ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("Product team")}>
+                                        <span className='role-opt-btn-key'>B</span>
+                                        <div>Product team</div>
+                                    </div>
+                                    <div key={'marketingRole'} className={formData["role"] === "Marketing team" ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("Marketing team")}>
+                                        <span className='role-opt-btn-key'>C</span>
+                                        <div className='role-opt-text'>Marketing team</div>
+                                    </div>
+                                    <div key={'vcRole'} className={formData["role"] === "VC" ? 'role-opt selected-option' : 'role-opt'} onClick={() => handleSelect("VC")}>
+                                        <span className='role-opt-btn-key'>D</span>
+                                        <div className='role-opt-text'>VC</div>
+                                    </div>
+                                    <div key={'otherrole'} className={formData["role"] === otherRole ? 'role-opt selected-option' : 'role-opt'} onClick={() => setEnableText(true)} >
+                                        {!enableText && <span className='role-opt-btn-key'>E</span>}
+                                        <div className='role-opt-text'>
+                                            {
+                                                enableText ?
+                                                    <input type="text" className='input-text-field-role' onChange={(e) => setOtherRole(e.target.value)} name="role-other" id="role-other" value={otherRole} /> :
+                                                    <span>{otherRole.length > 0 ? otherRole : "Other"}</span>
+                                            }
+                                        </div>
+                                        {enableText && <span onClick={changeOtherRole} className='role-text-btn-submit'>✓</span>}
+                                    </div>
                                 </div>
-                            </div>
-                            {
-                                (error.length > 0 && role.length === 0) &&
-                                <ErrorAlert errMsg={error} />
-                            }
-                        </section>
-                        <section className='actions'>
-                            <button className='cta-btn' onClick={handleSubmit}>OK ✓</button>
-                        </section>
-                    </div >
-                </div >
+                                {
+                                    (error.length > 0 && role.length === 0) &&
+                                    <ErrorAlert errMsg={error} />
+                                }
+                            </section>
+                            <section className='actions'>
+                                <button type='submit' className='cta-btn' onClick={handleSubmit}>OK ✓</button>
+                            </section>
+                        </div>
+                    </form>
+                </div>
             }
         </>
     )
