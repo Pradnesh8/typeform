@@ -95,7 +95,7 @@ const MultiOptionQuestion = () => {
                         <section className='content'>
                             <div className='header-text'>
                                 <span className='qno-text'>5 →</span>
-                                <span>Johb, what's your professional goal for the next 12 months? *</span>
+                                <span>{formData["name"]}, what's your professional goal for the next 12 months? *</span>
                             </div>
                             {
                                 selGoals.length != 2 &&
